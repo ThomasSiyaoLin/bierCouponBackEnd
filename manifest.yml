@@ -1,0 +1,7 @@
+---
+applications:
+- name: couponDemo
+  host: OpenSAP-chat
+  path: .
+  memory: 128M
+  buildpack: nodejs_buildpack
