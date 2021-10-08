@@ -1,7 +1,5 @@
 package com.couponsTest.couponDemo.controller;
 
-
-
 import com.couponsTest.couponDemo.couponExceptionHandler.MarketingCampaignExpiredException;
 import com.couponsTest.couponDemo.couponExceptionHandler.MarketingCampaignNotFoundException;
 import com.couponsTest.couponDemo.couponService.CouponService;
@@ -41,6 +39,7 @@ public class CouponController {
      * @throws MarketingCampaignExpiredException
      * @throws MarketingCampaignNotFoundException
       */
+    @CrossOrigin
     @PostMapping(path = "{marketingId}/{amount}/{startValue}")
     public ArrayList<Coupon> createCoupon(@PathVariable("marketingId") String marketingId,
                                           @PathVariable("amount") int amount,
@@ -56,7 +55,7 @@ public class CouponController {
      * @param couponID The UUID for the coupon to check
      * @return If successful a coupon object will be returned with the equal coupon ID.
      */
-
+    @CrossOrigin
     @GetMapping(path = "{couponID}")
     public Coupon checkValid(@PathVariable("couponID") String couponID) {
         Coupon couponToCheck =  couponService.checkCoupon(couponID);
@@ -70,6 +69,7 @@ public class CouponController {
      * @param userId The ID of the user itself
      * @return If successful a coupon object will be returned with the equal coupon ID and updated attributes.
      */
+    @CrossOrigin
     @PatchMapping(path = "{couponId}/{userId}")
     public Coupon redeemCode(@PathVariable("couponId") String couponId, @PathVariable("userId") String userId)  {
 

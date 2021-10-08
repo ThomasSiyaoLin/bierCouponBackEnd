@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * MarketingCampaignController class acts as the REST-API for the Marketing Campaigns.
@@ -22,7 +24,7 @@ import java.util.Date;
  * 3.) Retrieve an existing campaign
  * @author Thomas.Lin
  */
-
+@CrossOrigin
 @RestController
 @RequestMapping("/MarketingCampaignService")
 public class MarketingCampaignController {
@@ -46,7 +48,7 @@ public class MarketingCampaignController {
     @PostMapping(path = "{startDateString}/{endDateString}/{brand}")
     public MarketingCampaign createCampaign(@PathVariable("startDateString") String startDateString,
                                             @PathVariable("endDateString") String endDateString,
-                                            @PathVariable("brand")Brand brand) throws ParseException {
+                                            @PathVariable("brand")String brand) throws ParseException {
         Date startDate = new SimpleDateFormat("dd-MM-yyyy").parse(startDateString);
         Date endDate = new SimpleDateFormat("dd-MM-yyyy").parse(endDateString);
         return marketingCampaignService.createNewCampaign(startDate, endDate, brand);
@@ -73,5 +75,11 @@ public class MarketingCampaignController {
     @GetMapping(path = "{id}")
     public MarketingCampaign getCampaign(@PathVariable("id") String id){
         return marketingCampaignService.getCampaignById(id);
+    }
+
+    @CrossOrigin
+    @GetMapping
+    public List<MarketingCampaign> getAllCampaign(){
+        return marketingCampaignService.getAllCampaings();
     }
 }

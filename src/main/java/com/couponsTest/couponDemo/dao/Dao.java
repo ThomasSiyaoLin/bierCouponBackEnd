@@ -20,7 +20,8 @@ public interface Dao <T>  {
 
     void save(T c);
 
-    void update(String id, T toUpdate);
+    //void update(String id, T toUpdate);
 
     void delete(T object);
+
 }

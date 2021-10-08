@@ -75,6 +75,19 @@ public class CustomRestExceptionHandler {
 
             return handleInvalidRequestException(unfe, status);
          }
+        else if(ex instanceof BrandCreationException){
+            HttpStatus status = HttpStatus.BAD_REQUEST;
+            BrandCreationException unfe = (BrandCreationException) ex;
+
+            return handleBrandCreationException(unfe, status);
+        }
+        
+        else if(ex instanceof BrandNotFound){
+            HttpStatus status = HttpStatus.NOT_FOUND;
+            BrandNotFound unfe = (BrandNotFound) ex; 
+            
+            return handleBrandNotFoundException(unfe,status); 
+        }
 
         return null;
     }
@@ -116,6 +129,16 @@ public class CustomRestExceptionHandler {
     private ResponseEntity<ApiError> handleInvalidRequestException(InvalidRequestException ex, HttpStatus status){
         ApiError invalidRequest = new ApiError(status, ex, ZonedDateTime.now(), "The amount of coupons must be greater then 0");
         return new ResponseEntity<ApiError>(invalidRequest,status);
+    }
+
+    private ResponseEntity<ApiError>  handleBrandCreationException(BrandCreationException ex, HttpStatus status){
+        ApiError brandCreationFail = new ApiError(status, ex, ZonedDateTime.now(), "Brand already exists");
+        return new ResponseEntity<ApiError>(brandCreationFail,status);
+    }
+
+    private ResponseEntity<ApiError>  handleBrandNotFoundException(BrandNotFound ex, HttpStatus status){
+        ApiError brandCreationFail = new ApiError(status, ex, ZonedDateTime.now(), "Brand not found");
+        return new ResponseEntity<ApiError>(brandCreationFail,status);
     }
 
 }

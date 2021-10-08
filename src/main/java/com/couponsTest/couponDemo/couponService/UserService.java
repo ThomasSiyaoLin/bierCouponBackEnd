@@ -37,8 +37,8 @@ public class UserService {
         return newUser;
     }
 
-    public User createUser(){
-        String newUserId = generateUUID();
+    public User createUser(String email){
+        String newUserId = email;
         User newUser = new User(newUserId, "NULL", "NULL");
         userDao.save(newUser);
         return newUser;

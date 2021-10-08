@@ -7,8 +7,6 @@ import com.couponsTest.couponDemo.entity.Coupon;
 import com.couponsTest.couponDemo.entity.MarketingCampaign;
 import com.couponsTest.couponDemo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -61,17 +59,13 @@ public class CouponService {
         ArrayList<Coupon> couponCollection = new ArrayList<>();     //Create the coupons the client ordered and return them later as an ArrayList
         Coupon.setCurrentStartId(startValue); //Set up the desired start Value of the coupons
 
-
         for(int i = 0; i < amount; i++){
             Coupon newCoupon = new Coupon(marketingId);
             while(couponDao.isCouponPresent(newCoupon))
                 newCoupon = new Coupon(marketingId);
             couponCollection.add(newCoupon);
         }
-
         couponCollection.forEach((Coupon coupon) -> couponDao.save(coupon));
-
-
         return couponCollection;
     }
 
@@ -102,7 +96,7 @@ public class CouponService {
             user = userService.getUser(userId);
         }
         catch(UserNotFoundException userNotFoundException){
-            user = userService.createUser();
+            user = userService.createUser(userId);
         }
 
         couponToRedeem.setUserID(user.getUserId());

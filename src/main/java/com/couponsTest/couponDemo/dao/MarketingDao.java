@@ -7,6 +7,8 @@ import com.couponsTest.couponDemo.repository.MarketingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +47,7 @@ public class MarketingDao implements Dao <MarketingCampaign> {
         marketingRepository.save(t);
     }
 
-    @Override
+
     public void update(String id, MarketingCampaign toUpdate) {
         if(marketingRepository.existsById(id)){
             marketingRepository.delete(marketingRepository.findById(id).get());
@@ -60,6 +62,9 @@ public class MarketingDao implements Dao <MarketingCampaign> {
             marketingRepository.delete(t);
     }
 
+    public List getAllCampaign(){
+        return marketingRepository.findAll();
+    }
     public boolean isCampaignValid(String id){
         return marketingRepository.existsById(id);
     }

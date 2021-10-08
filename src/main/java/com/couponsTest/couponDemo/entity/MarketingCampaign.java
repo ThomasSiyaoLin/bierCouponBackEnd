@@ -16,12 +16,11 @@ public class MarketingCampaign {
     private String campaignName;
     private Date startDate;
     private Date endDate;
-    @Enumerated(EnumType.STRING)
-    private Brand brand;
+    private String brand;
 
     //Constructor for creating a new campaign with the marketing Service class
     //Note that campaign name is not set here to avoid long URI
-    public MarketingCampaign( Date startDate, Date endDate, Brand brand){
+    public MarketingCampaign( Date startDate, Date endDate, String brand){
         if(startDate.after(endDate))
             throw new MarketingCreationException(campaignID, startDate, endDate);
         this.campaignID = UUID.randomUUID().toString();

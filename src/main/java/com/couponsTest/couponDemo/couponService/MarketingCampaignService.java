@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -33,7 +35,7 @@ public class MarketingCampaignService {
      * @return If successful the marketing object will be returned
      * To see what exceptions will be thrown, please refer to the marketing controller class
      */
-    public MarketingCampaign createNewCampaign( Date startDate, Date endDate, Brand brand) {
+    public MarketingCampaign createNewCampaign( Date startDate, Date endDate, String brand) {
         MarketingCampaign newCampaign = new MarketingCampaign( startDate, endDate, brand);
         while(marketingDao.isCampaignValid(newCampaign.getCampaignID()))
             newCampaign = new MarketingCampaign( startDate, endDate, brand);
@@ -55,6 +57,10 @@ public class MarketingCampaignService {
 
     public Optional<MarketingCampaign> getOptionalMarketing(String id){
         return marketingDao.get(id);
+    }
+
+    public List<MarketingCampaign> getAllCampaings(){
+        return marketingDao.getAllCampaign();
     }
 
     public boolean isCampaignValid(String id){
